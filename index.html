@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIOLIN KATE - Virtuoso Experience</title>
+    <!-- Bootstrap 5.3.7 - Latest Version -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* BULLETPROOF FIXES - Ensures nav works even if Bootstrap fails */
+        .navbar .container > .d-flex { 
+            display: flex !important; 
+            align-items: center !important; 
+            width: 100% !important;
+        }
+        
+        .ms-auto { 
+            margin-left: auto !important;
+        }
+        
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+        
+        .text-white {
+            color: white !important;
+        }
+        
+        .fw-light {
+            font-weight: 300 !important;
+        }
+        
+        .w-100 {
+            width: 100% !important;
+        }
+        
+        .container { 
+            max-width: 1140px;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .d-flex { 
+            display: flex !important;
+        }
+        
+        .align-items-center { 
+            align-items: center !important;
+        }
+        
+        /* Container responsive widths */
+        @media (min-width: 576px) {
+            .container { max-width: 540px; }
+        }
+        @media (min-width: 768px) {
+            .container { max-width: 720px; }
+        }
+        @media (min-width: 992px) {
+            .container { max-width: 960px; }
+        }
+        @media (min-width: 1200px) {
+            .container { max-width: 1140px; }
+        }
+        @media (min-width: 1400px) {
+            .container { max-width: 1320px; }
+        }
+        
+        /* Alternative: Use .container-fluid for full-width */
+        .container-fluid { 
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        :root {
+            --primary-peach: #FFB5A7;
+            --secondary-peach: #FCD5CE;
+            --accent-coral: #F8AD9D;
+            --light-pink: #FEC5BB;
+            --cream: #FFF1E6;
+            --glass-white: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #FEC5BB 0%, #FCD5CE 25%, #FFB5A7 50%, #F8AD9D 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Floating Orbs Animation */
+        .floating-orbs {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 20s infinite ease-in-out;
+            opacity: 0.4;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #FFB5A7, transparent);
+            top: -150px;
+            left: -150px;
+            animation-duration: 25s;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #FCD5CE, transparent);
+            bottom: -200px;
+            right: -200px;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #F8AD9D, transparent);
+            top: 50%;
+            left: 50%;
+            animation-duration: 35s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -100px) scale(1.1); }
+            50% { transform: translate(-100px, 100px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+
+        /* Glassmorphism Elements */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(251, 181, 167, 0.37);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        /* Warm peach glass for better contrast without going grey/black */
+        .glass-card.ink {
+          background: linear-gradient(
+            135deg,
+            rgba(255, 196, 185, .42),   /* light peach tint */
+            rgba(248, 173, 157, .36)    /* coral tint */
+          );
+          /* Dim the background behind the card slightly, but keep it warm */
+          backdrop-filter: blur(22px) brightness(.78) saturate(115%);
+          -webkit-backdrop-filter: blur(22px) brightness(.78) saturate(115%);
+          border: 1px solid rgba(255,255,255,.32);
+          box-shadow:
+            0 20px 60px rgba(248, 173, 157, .35),   /* peachy outer glow */
+            inset 0 1px 0 rgba(255,255,255,.25);    /* subtle top highlight */
+        }
+
+        /* Crisp white text with a tiny warm shadow (no grey halo) */
+        .glass-card.ink .about-text {
+          color: #fff;
+          font-weight: 100;
+          text-shadow:
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px 0 rgba(251, 181, 167, 0.5);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            top: 0;
+            left: 0;
+        }
+
+        .navbar.scrolled {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* LOGO IMAGE - REPLACE THE ICON WITH YOUR LOGO */
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(255, 181, 167, 0.98), rgba(252, 213, 206, 0.98));
+            backdrop-filter: blur(20px);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 80px 30px 30px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            display: block;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            padding-left: 10px;
+            color: var(--cream);
+        }
+
+        .close-mobile-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section with Parallax */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+                
+.horizontal-scroll-wrapper{
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;   /* momentum scroll on iOS */
+  touch-action: pan-x pinch-zoom;      /* allow horizontal swipes */
+  overscroll-behavior-x: contain;      /* don't bubble to page */
+  scroll-snap-type: x proximity;       /* optional but nice */
+}
+
+
+/* on touch devices, keep it static */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-image-container:hover { transform: scale(1.05); }
+  .gallery-image-container:hover .gallery-image { transform: scale(1.1); }
+}
+
+.gallery-card{ scroll-snap-align: start; }  /* optional */
+
+.gallery-card{ flex: 0 0 300px; }       /* 250px in your mobile MQ if you want */
+
+.gallery-card{ scroll-snap-align: start; }  /* optional */
+
+        /* HERO IMAGE BACKGROUND - REPLACE 'YOUR_HERO_IMAGE.jpg' WITH YOUR IMAGE PATH */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/Landscape/hero.jpg'); /* <-- REPLACE WITH YOUR 5434x3623 IMAGE */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        /* Color overlay to soften the hero image - LIGHTENED */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(254, 197, 187, 0.45), 
+                rgba(252, 213, 206, 0.38), 
+                rgba(255, 181, 167, 0.45), 
+                rgba(248, 173, 157, 0.38));
+            z-index: 2;
+        }
+
+        /* Optional: Slightly higher opacity on mobile for better readability */
+        @media (max-width: 768px) {
+            .hero-overlay {
+                background: linear-gradient(135deg, 
+                    rgba(254, 197, 187, 0.5), 
+                    rgba(252, 213, 206, 0.43), 
+                    rgba(255, 181, 167, 0.5), 
+                    rgba(248, 173, 157, 0.43));
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: fadeInUp 1.5s ease;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 100;
+            color: white;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section - Spacing handled by top padding */
+        .about-section {
+            padding: 50px 0 0 0;  /* First section after hero needs less top */
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: white;
+            font-weight: 300;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+        }
+
+        .about-text::before {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .about-text::after {
+            content: '✨';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .about-text strong {
+            font-weight: 500;
+            color: var(--cream);
+        }
+
+        /* Horizontal Scroll Gallery - Space ABOVE section */
+        .horizontal-scroll-section {
+            padding: 100px 0 0 0;  /* Space above, not below */
+            position: relative;
+            z-index: 10;
+        }
+
+        .horizontal-scroll-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 40px 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .gallery-card {
+            display: inline-block;
+            width: 300px;
+            margin: 0 20px;
+            vertical-align: top;
+            white-space: normal;
+        }
+
+        .gallery-image-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* GALLERY IMAGES - REPLACE WITH YOUR PORTRAIT IMAGES */
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image-container:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        /* Video Section - Space ABOVE section */
+        .video-section {
+            padding: 100px 0 0 0;  /* Space above, not below */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* YOUTUBE VIDEO - REPLACE 'YOUR_VIDEO_ID' WITH ACTUAL YOUTUBE VIDEO ID */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Services Section - Space ABOVE section */
+        .services-section {
+            padding: 100px 0 0 0;  /* Space above, not below */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Services Cards with Modal */
+        .service-card {
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover::before {
+            animation: shimmer 0.5s ease;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(251, 181, 167, 0.6);
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 181, 167, 0.95), rgba(252, 213, 206, 0.95));
+            backdrop-filter: blur(20px);
+            border: none;
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Contact Section - Space ABOVE and BELOW */
+        .contact-section {
+            padding: 100px 0 80px 0;  /* Space above AND below for footer */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-peach);
+            box-shadow: 0 0 0 0.2rem rgba(255, 181, 167, 0.25);
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-label {
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Animated Button */
+        .cta-button {
+            background: linear-gradient(135deg, #FFB5A7, #F8AD9D);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(248, 173, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(248, 173, 157, 0.6);
+            color: white;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;  /* Reduced from 50px */
+            margin-top: 0;  /* Ensure no top margin */
+            font-weight: 200;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+                letter-spacing: 5px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 20px;  /* Even less margin on mobile */
+            }
+
+            .gallery-card {
+                width: 250px;
+            }
+
+            .gallery-image-container {
+                height: 350px;
+            }
+
+            .about-text {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+
+            /* Adjust section padding for mobile */
+            .about-section,
+            .horizontal-scroll-section,
+            .video-section,
+            .services-section,
+            .contact-section {
+                padding: 0 0 60px 0;  /* Zero top padding on mobile too */
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* YouTube Carousel Styles */
+        .yt-carousel {
+            position: relative;
+            width: 100%;
+        }
+
+        .yt-carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yt-carousel-arrow:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .yt-carousel-arrow.yt-prev {
+            left: -25px;
+        }
+
+        .yt-carousel-arrow.yt-next {
+            right: -25px;
+        }
+
+        @media (max-width: 768px) {
+            .yt-carousel-arrow {
+                width: 40px;
+                height: 40px;
+            }
+            .yt-carousel-arrow.yt-prev {
+                left: 10px;
+            }
+            .yt-carousel-arrow.yt-next {
+                right: 10px;
+            }
+        }
+
+        .yt-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .yt-carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .yt-carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* WhatsApp Widget Styles */
+        .wa-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .wa-bubble {
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .wa-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .wa-bubble svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .wa-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wa-modal-overlay.wa-active {
+            display: block;
+            opacity: 1;
+        }
+
+        .wa-modal {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 100%;
+            max-width: 380px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10001;
+            display: none;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .wa-modal.wa-active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 420px) {
+            .wa-modal {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+
+        .wa-modal-header {
+            background: #25D366;
+            color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wa-modal-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .wa-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wa-modal-body {
+            padding: 20px;
+        }
+
+        .wa-message-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .wa-message-box:focus {
+            outline: none;
+            border-color: #25D366;
+        }
+
+        .wa-quick-replies {
+            margin-bottom: 20px;
+        }
+
+        .wa-quick-reply {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .wa-quick-reply:hover {
+            background: #e8e8e8;
+            border-color: #25D366;
+        }
+
+        .wa-consent {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .wa-consent input[type="checkbox"] {
+            margin-right: 8px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .wa-consent label {
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .wa-consent a {
+            color: #25D366;
+            text-decoration: none;
+        }
+
+        .wa-consent a:hover {
+            text-decoration: underline;
+        }
+
+        .wa-send-btn {
+            width: 100%;
+            padding: 12px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .wa-send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .wa-send-btn:not(:disabled):hover {
+            background: #20ba5a;
+            transform: translateY(-2px);
+        }
+
+        .wa-send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Orbs Background -->
+    <div class="floating-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="d-flex align-items-center w-100">
+                <!-- Logo and Brand Name (Left Aligned) -->
+                <div class="logo-section">
+                    <div class="logo-placeholder">
+                        <img src="Violin_kate.png" alt="kate_logo.png">
+                    </div>
+                </div>
+                
+                <!-- NEW WRAPPER FOR RIGHT-ALIGNED ELEMENTS -->
+                <div class="d-flex align-items-center ms-auto">
+                    <!-- Desktop Navigation -->
+                    <div class="nav-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#gallery">Gallery</a>
+                        <a href="#performances">Performances</a>
+                        <a href="#services">Services</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-mobile-menu" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="#gallery" onclick="toggleMobileMenu()">Gallery</a>
+        <a href="#performances" onclick="toggleMobileMenu()">Performances</a>
+        <a href="#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section with Background Image -->
+    <section id="home" class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">VIOLIN KATE</h1>
+            <p class="hero-subtitle">Where Music Meets Magic</p>
+            <a href="#contact" class="cta-button">
+                Contact for Bookings <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section - NEW -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="glass-card reveal ink">
+                    <div class="about-text has-backplate">
+                        <strong>Hi, I'm Kate!</strong> I'm a professionally trained violinist and electric LED performer with <strong>11 years of professional experience</strong>. Based in <strong>Milan, Italy</strong>, I've brought vibrant energy and elegance to stages in <strong>38 countries</strong> from fashion shows and luxury weddings to clubs, theatres, and cruise ships. My performances blend style, grace, and a powerful stage presence, turning music into an atmosphere of beauty and emotion.<br><br>As an <strong>Electric LED Violinist</strong>, I don't stay rooted to one spot I move effortlessly through the crowd, weaving the music into the room itself. That mobility, paired with my signature LED violin (which audiences love and photographers adore), makes each show immersive and unforgettable.<br><br>
+Whether in Italy, across Europe, or worldwide, I tailor every set to the moment elevating weddings, corporate events, and private celebrations with polished, high-impact music that feels alive.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Scroll Gallery -->
+    <section id="gallery" class="horizontal-scroll-section">
+        <div class="container">
+            <h2 class="section-title reveal">PERFORMANCE GALLERY</h2>
+            <div class="horizontal-scroll-wrapper">
+                <!-- GALLERY IMAGE 1 - REPLACE 'gallery1.jpg' WITH YOUR IMAGE -->
+                <div class="gallery-card">
+                    <div class="gallery-image-container">
+                        <img src="images/Portrait/1.jpg" alt="Performance 1" class="gallery-image">
+                    </div>
+                </div>
+                
+                <!-- GALLERY IMAGE 2 - REPLACE 'gallery2.jpg' WITH YOUR IMAGE -->
+                <div class="gallery-card">
+                    <div class="gallery-image-container">
+                        <img src="images/Portrait/2.jpg" alt="Performance 2" class="gallery-image">
+                    </div>
+                </div>
+                
+                <!-- GALLERY IMAGE 3 - REPLACE 'gallery3.jpg' WITH YOUR IMAGE -->
+                <div class="gallery-card">
+                    <div class="gallery-image-container">
+                        <img src="images/Portrait/3.jpg" alt="Performance 3" class="gallery-image">
+                    </div>
+                </div>
+                
+                <!-- GALLERY IMAGE 4 - REPLACE 'gallery4.jpg' WITH YOUR IMAGE -->
+                <div class="gallery-card">
+                    <div class="gallery-image-container">
+                        <img src="images/Portrait/4.jpg" alt="Performance 4" class="gallery-image">
+                    </div>
+                </div>
+                
+                <!-- GALLERY IMAGE 5 - REPLACE 'gallery5.jpg' WITH YOUR IMAGE -->
+                <div class="gallery-card">
+                    <div class="gallery-image-container">
+                        <img src="images/Portrait/5.jpg" alt="Performance 5" class="gallery-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section with Carousel -->
+    <section id="performances" class="video-section">
+        <div class="container">
+            <h2 class="section-title reveal">FEATURED PERFORMANCES</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="glass-card p-4">
+                        <div class="yt-carousel">
+                            <div class="video-container" aria-live="polite">
+                                <iframe 
+                                    id="ytPlayer"
+                                    src=""
+                                    data-src="https://www.youtube.com/embed/ycIn9FZ93Lk"
+                                    title="Violin Kate Performance"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <button class="yt-carousel-arrow yt-prev" aria-label="Previous video">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="yt-carousel-arrow yt-next" aria-label="Next video">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <div class="yt-carousel-dots"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - NOTE: Fixed class name -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title reveal">SERVICES</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card service-card h-100" onclick="openServiceModal('weddings')">
+                        <div class="text-center text-white">
+                            <i class="fas fa-heart fa-3x mb-3"></i>
+                            <h4>Weddings</h4>
+                            <p class="mb-0">Create unforgettable moments with elegant violin performances for your special day.</p>
+                            <small class="mt-2 d-block" style="opacity: 0.8;">Click to learn more</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card service-card h-100" onclick="openServiceModal('events')">
+                        <div class="text-center text-white">
+                            <i class="fas fa-champagne-glasses fa-3x mb-3"></i>
+                            <h4>Corporate & Private Events</h4>
+                            <p class="mb-0">Sophisticated entertainment for galas, parties, and corporate gatherings.</p>
+                            <small class="mt-2 d-block" style="opacity: 0.8;">Click to learn more</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card service-card h-100" onclick="openServiceModal('special')">
+                        <div class="text-center text-white">
+                            <i class="fas fa-star fa-3x mb-3"></i>
+                            <h4>Special Occasions</h4>
+                            <p class="mb-0">Anniversaries, proposals, birthday celebrations, and intimate performances.</p>
+                            <small class="mt-2 d-block" style="opacity: 0.8;">Click to learn more</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Modals -->
+    <div class="modal fade" id="serviceModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white border-0">
+                    <h5 class="modal-title" id="modalTitle">Service Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-white">
+                    <img id="modalImage" src="" alt="Service Image">
+                    <p id="modalDescription"></p>
+                    <h5>Repertoire includes:</h5>
+                    <ul id="modalRepertoire"></ul>
+                    <div class="text-center mt-4">
+                        <button class="cta-button" onclick="closeModalAndGoToContact()">
+                            Contact for Bookings <i class="fas fa-calendar-check ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section with Form -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title reveal">GET IN TOUCH</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card">
+                        <!-- CONTACT FORM - USING FORMSPREE -->
+                        <form class="contact-form" action="https://formspree.io/f/xyyalnbo" method="POST">
+                            <!-- This form is configured to send emails to katekor777@gmail.com via Formspree -->
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="eventType" class="form-label">Event Type</label>
+                                <select class="form-control" id="eventType" name="eventType" required>
+                                    <option value="">Select an event type...</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="private">Private Party</option>
+                                    <option value="anniversary">Anniversary</option>
+                                    <option value="birthday">Birthday Celebration</option>
+                                    <option value="other">Other Special Occasion</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="eventDate" class="form-label">Event Date</label>
+                                <input type="date" class="form-control" id="eventDate" name="eventDate">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Tell me about your event</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="cta-button">
+                                    Send Message <i class="fas fa-paper-plane ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Social Links -->
+                        <div class="text-center text-white mt-5">
+                            <p class="mb-3">
+                                Call +380664117037, +393513956700 <br>
+                                Or connect with me on social media:
+                            </p>
+                            <div class="d-flex justify-content-center gap-4">
+                                <!-- Instagram -->
+                                <a href="https://www.instagram.com/violin_kate_show?igsh=MzF1YnNscXA1eGR0" 
+                                   target="_blank" class="text-white fs-2">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/share/1MHv68yhMj/" 
+                                   target="_blank" class="text-white fs-2">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+
+                                <!-- TikTok (Font Awesome uses 'fa-tiktok') -->
+                                <a href="https://www.tiktok.com/@violinkateshow?_t=ZN-8z2o1dsu8Ws&_r=1" 
+                                   target="_blank" class="text-white fs-2">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+
+                                <!-- YouTube -->
+                                <a href="https://www.youtube.com/@violinKate" 
+                                   target="_blank" class="text-white fs-2">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+
+                                <!-- Email -->
+                                <a href="mailto:katekor777@gmail.com" 
+                                   class="text-white fs-2">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Widget HTML -->
+    <div class="wa-widget">
+        <div class="wa-bubble" onclick="openWhatsAppModal()" aria-label="Open WhatsApp chat">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="wa-modal-overlay" id="waOverlay" onclick="closeWhatsAppModal()" aria-hidden="true"></div>
+    
+    <div class="wa-modal" id="waModal" role="dialog" aria-hidden="true">
+        <div class="wa-modal-header">
+            <div class="wa-modal-title">Chat with Kate</div>
+            <button class="wa-modal-close" onclick="closeWhatsAppModal()" aria-label="Close chat">×</button>
+        </div>
+        <div class="wa-modal-body">
+            <textarea class="wa-message-box" id="waMessage" placeholder="Type your message here...">Hi Kate! I'm interested in a violin booking.</textarea>
+            
+            <div class="wa-quick-replies">
+                <span class="wa-quick-reply" onclick="selectQuickReply(0)">Are you available on [date]?</span>
+                <span class="wa-quick-reply" onclick="selectQuickReply(1)">What's the rate for an event set?</span>
+                <span class="wa-quick-reply" onclick="selectQuickReply(2)">Do you play weddings?</span>
+            </div>
+            
+            <div class="wa-consent">
+                <input type="checkbox" id="waConsent" onchange="toggleSendButton()">
+                <label for="waConsent">
+                    I agree to share my message via WhatsApp. View our <a href="privacy.html" target="_blank">Privacy Policy</a>.
+                </label>
+            </div>
+            
+            <button class="wa-send-btn" id="waSendBtn" onclick="sendWhatsAppMessage()" disabled>
+                <span>Start WhatsApp Chat</span>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3.7 Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script>
+        // Mobile Menu Toggle - Fixed
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            const body = document.body;
+            
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                body.style.overflow = '';
+            } else {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    overlay.style.display = 'block';
+                }, 10);
+                body.style.overflow = 'hidden';
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target) && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Service Modal Data
+        const serviceData = {
+            weddings: {
+                title: 'Wedding Ceremonies',
+                image: 'images/Landscape/3.jpg',
+                description: 'Transform your wedding into an unforgettable celebration with live violin performances. From walking down the aisle to your first dance, every moment becomes more magical with the perfect musical accompaniment.',
+                repertoire: [
+                    'Classical processional and recessional music',
+                    'Contemporary love songs arranged for violin',
+                    'Traditional wedding marches',
+                    'Custom song requests for your special moments',
+                    'Cocktail hour entertainment'
+                ]
+            },
+            events: {
+                title: 'Corporate & Private Events',
+                image: 'images/Landscape/2.jpg',
+                description: 'Elevate your corporate gatherings, galas, and private parties with sophisticated violin entertainment. Create the perfect ambiance for networking, celebrations, and memorable occasions.',
+                repertoire: [
+                    'JTop POP latest hits ,  smooth jazz , classical favorites ,Rock , Holiday and seasonal music',
+                    'Custom playlists tailored to your Event theme',
+                    'Led Violin show ( 50 different colors &combination  . Limited edition custom Violin',
+                    'Dancing Violin',
+                    'Collaboration with Dj & Other musicians & shows'
+                ]
+            },
+            special: {
+                title: 'Special Occasions',
+                image: 'images/Landscape/5.jpg',
+                description: 'Make life\'s special moments even more memorable with personalized violin performances. Perfect for proposals, anniversaries, birthdays, and intimate celebrations.',
+                repertoire: [
+                    'Romantic serenades',
+                    'Birthday song variations',
+                    'Anniversary favorites',
+                    'Surprise performance packages',
+                    'Personalized musical dedications'
+                ]
+            }
+        };
+
+        // Open Service Modal
+        function openServiceModal(service) {
+            const modal = new bootstrap.Modal(document.getElementById('serviceModal'));
+            const data = serviceData[service];
+            
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalImage').src = data.image;
+            document.getElementById('modalDescription').textContent = data.description;
+            
+            const repertoireList = document.getElementById('modalRepertoire');
+            repertoireList.innerHTML = '';
+            data.repertoire.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                repertoireList.appendChild(li);
+            });
+            
+            modal.show();
+        }
+
+        // Close Modal and Go to Contact
+        function closeModalAndGoToContact() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('serviceModal'));
+            modal.hide();
+            
+            // Wait for modal to close then scroll to contact
+            setTimeout(() => {
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function checkReveal() {
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkReveal);
+        checkReveal();
+
+        // Horizontal Scroll with Mouse Wheel
+        const scrollWrapper = document.querySelector('.horizontal-scroll-wrapper');
+        if (scrollWrapper) {
+            scrollWrapper.addEventListener('wheel', (e) => {
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+                    scrollWrapper.scrollLeft += e.deltaY * 2;
+                }
+            });
+        }
+
+        // Form Submission Success Message (optional)
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', function(e) {
+            // This will be handled by Formspree
+            // The form will redirect to Formspree's thank you page after submission
+        });
+    </script>
+
+    <!-- WhatsApp Widget JavaScript -->
+    <script>
+        // WhatsApp Configuration
+        const WA_PHONE = "380664117037";
+        const DEFAULT_MSG = "Hi Kate! I'm interested in a violin booking.";
+        const QUICK_REPLIES = [
+            "Are you available on [date]?",
+            "What's the rate for an event set?",
+            "Do you play weddings?"
+        ];
+        const includePage = false ;
+
+        function openWhatsAppModal() {
+            const modal = document.getElementById('waModal');
+            const overlay = document.getElementById('waOverlay');
+            modal.classList.add('wa-active');
+            overlay.classList.add('wa-active');
+            modal.setAttribute('aria-hidden', 'false');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeWhatsAppModal() {
+            const modal = document.getElementById('waModal');
+            const overlay = document.getElementById('waOverlay');
+            modal.classList.remove('wa-active');
+            overlay.classList.remove('wa-active');
+            modal.setAttribute('aria-hidden', 'true');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function selectQuickReply(index) {
+            const messageBox = document.getElementById('waMessage');
+            messageBox.value = QUICK_REPLIES[index];
+        }
+
+        function toggleSendButton() {
+            const checkbox = document.getElementById('waConsent');
+            const button = document.getElementById('waSendBtn');
+            button.disabled = !checkbox.checked;
+        }
+
+        function sendWhatsAppMessage() {
+            const message = document.getElementById('waMessage').value;
+            let finalMessage = message;
+            
+            if (includePage) {
+                finalMessage += `\n\n(From: ${document.title} - ${window.location.href})`;
+            }
+            
+            const encodedMessage = encodeURIComponent(finalMessage);
+            const whatsappURL = `https://wa.me/${WA_PHONE}?text=${encodedMessage}`;
+            
+            // Try primary URL
+            window.open(whatsappURL, '_blank');
+            
+            // Fallback if blocked
+            setTimeout(() => {
+                const fallbackURL = `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodedMessage}`;
+                if (confirm('If WhatsApp didn\'t open, click OK to try again.')) {
+                    window.open(fallbackURL, '_blank');
+                }
+            }, 3000);
+            
+            closeWhatsAppModal();
+        }
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('waModal');
+                if (modal.classList.contains('wa-active')) {
+                    closeWhatsAppModal();
+                }
+            }
+        });
+    </script>
+
+    <!-- YouTube Carousel JavaScript -->
+    <script>
+        const YT_VIDEOS = ["ycIn9FZ93Lk", "Jah0dmaaM6s"];
+        let currentVideoIndex = 0;
+
+        function initCarousel() {
+            const player = document.getElementById('ytPlayer');
+            const dotsContainer = document.querySelector('.yt-carousel-dots');
+            
+            // Load first video
+            player.src = player.dataset.src;
+            
+            // Create dots
+            YT_VIDEOS.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'yt-carousel-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => goToVideo(index);
+                dotsContainer.appendChild(dot);
+            });
+            
+            // Arrow navigation
+            document.querySelector('.yt-prev').onclick = prevVideo;
+            document.querySelector('.yt-next').onclick = nextVideo;
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                const carousel = document.querySelector('.yt-carousel');
+                if (carousel && isElementInViewport(carousel)) {
+                    if (e.key === 'ArrowLeft') prevVideo();
+                    if (e.key === 'ArrowRight') nextVideo();
+                }
+            });
+        }
+
+        function goToVideo(index) {
+            const player = document.getElementById('ytPlayer');
+            const dots = document.querySelectorAll('.yt-carousel-dot');
+            
+            // Stop current video
+            player.src = '';
+            
+            // Update index
+            currentVideoIndex = index;
+            
+            // Load new video
+            setTimeout(() => {
+                player.src = `https://www.youtube.com/embed/${YT_VIDEOS[index]}`;
+            }, 100);
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            // Announce change for screen readers
+            const container = document.querySelector('.video-container');
+            container.setAttribute('aria-label', `Video ${index + 1} of ${YT_VIDEOS.length}`);
+        }
+
+        function prevVideo() {
+            const newIndex = currentVideoIndex === 0 ? YT_VIDEOS.length - 1 : currentVideoIndex - 1;
+            goToVideo(newIndex);
+        }
+
+        function nextVideo() {
+            const newIndex = (currentVideoIndex + 1) % YT_VIDEOS.length;
+            goToVideo(newIndex);
+        }
+
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top >= 0 && rect.bottom <= window.innerHeight;
+        }
+
+        // Initialize carousel when DOM is ready
+        document.addEventListener('DOMContentLoaded', initCarousel);
+    </script>
+
+    <footer class="text-center text-white" style="padding: 24px 0; opacity: .9;">
+      <a href="privacy.html" class="text-white" style="text-decoration: underline;">Privacy Policy</a>
+    </footer>
+
+</body>
+</html>
